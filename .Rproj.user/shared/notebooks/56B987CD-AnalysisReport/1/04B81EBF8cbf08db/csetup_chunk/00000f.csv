@@ -1,0 +1,7 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"2","Warning message:
+"
+"2","In formals(fun) :"
+"2"," argument is not a function
+"
+"0","knitr::opts_knit$set(root.dir = normalizePath('..'))"

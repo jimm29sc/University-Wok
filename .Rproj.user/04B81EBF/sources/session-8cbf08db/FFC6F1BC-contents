@@ -1,0 +1,22 @@
+---
+title: "Analysis Report"
+output: pdf_document
+date: "2024-11-15"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath('..'))
+```
+
+```{r}
+library(ProjectTemplate)
+load.project()
+```
+
+```{r}
+install.packages("tinytex")
+tinytex::install_tinytex()
+
+```
+

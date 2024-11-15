@@ -1,0 +1,970 @@
+---
+title: "An Exploratory Analysis on Video Stats Dataset"
+author: "Jimmy Cabrera - 230702295"
+output: pdf_document
+date: "2024-11-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath('..'))
+```
+
+```{r}
+library(ProjectTemplate)
+load.project()
+```
+
+
+
+\section{\Large Introduction}
+
+\small This report provides an analysis of data from seven years of an open online course (MOOC) developed by Newcastle University and delivered through the online platform 'FutureLearn'. The course, titled "Cyber Security: Safety At Home, Online, and in Life", was a three-week program, free for anyone to access.
+
+The data includes metrics collected by FutureLearn, tracking learner engagement and interaction throughout the course. In this report, a specific research question related to learner engagement in video content is investigated, using exploratory data analysis aligned with the Cross Industry Standard Process for Data Mining (CRISP-DM). This report will provide insights into video engagement trends and other relevant statistics across the seven-year span.
+
+\section{\Large Round 1 of the CRISP-DM Cycle}
+
+\section{\Large Business Understanding}
+
+The initial phase of this analysis process involves firstly establishing the business objectives, identifying relevant stakeholders, and outlining clear aims for the desired outcomes. This stage also entails defining success criteria to assess the effectiveness of the results. Based on the insights gathered during this phase, a detailed plan has been created, to align with the principles and structure of the CRISP-DM framework. This phase of the CRISP-DM cycle is essential for ensuring that the analysis is purposeful, targeted, and relevant to the stakeholders involved.
+
+\section{\normalsize Objective}
+
+The primary objective of this analysis is to provide valuable insights into the video engagement data for the course "Cyber Security: Safety At Home, Online, and in Life". By analyzing key metrics, such as video view counts, device usage patterns, and regional engagement statistics, this research aims to uncover trends and patterns that can be leveraged to improve course content and learner engagement. The analysis is specifically intended to help course designers and educators better understand how learners interact with the course videos, which video content resonates most with the audience, and where potential improvements can be made to enhance the overall learning experience.
+
+\section{\normalsize Stakeholders}
+
+The key stakeholders in this analysis are the course developers, educators, and administrators at Newcastle University, as well as the online learning platform FutureLearn. These stakeholders will benefit from the findings as they can use the insights to make data driven decisions regarding course content, structure, and marketing strategies. By understanding which video segments capture learners' attention and which areas might need adjustment. From here the stakeholders can optimize the course to increase engagement and completion rates. Additionally, this information can be useful to instructional designers aiming to enhance learner outcomes by aligning content with the preferences and needs of the target audience specially when dealing with other regions where access could be limited.
+
+\vspace{1cm}
+
+\section{\normalsize Analysis Goals}
+
+The specific goals of this analysis are as followed:
+
+-	To identify patterns in video engagement, including total views, downloads, and caption/transcript views, across different video segments.
+-	To analyze user behavior related to video completion rates at various viewing thresholds (e.g., 5%, 50%, 100%) and device usage trends (e.g., mobile, desktop, tablet).
+-	To explore geographical variations in engagement, focusing on how learners from different continents interact with the course videos.
+
+\section{\normalsize Success Criteria}
+
+Success in this analysis will be determined by the ability to provide actionable insights that address the stated goals. The data should be presented in a way that is easily interpretable by stakeholders. The final analysis will offer clear recommendations for improving the course’s content, delivery, and overall user experience, which can then be used to inform decisions regarding future iterations of the course. The success of the investigation will also be evaluated based on how effectively it helps stakeholders understand the key drivers of engagement and how these insights can be leveraged to enhance the learning experience.
+
+\section{\normalsize Initial Research Question}
+
+In alignment with the objective of this report, the initial research question guiding this analysis is:
+
+"How does learner engagement with the video content vary across different segments of the course, and how do factors such as device type, geographic location, and viewing patterns impact overall video performance?"
+
+By addressing this question, the analysis will provide a detailed exploration of video engagement, offering insights that are both specific and actionable for stakeholders seeking to improve the course's effectiveness.
+
+\section{\Large Data Understanding}
+
+In Phase 2 of the CRISP-DM cycle, the focus shifts to a much thorough understanding of the data. This involves assessing the data requirements based on the objectives outlined in the previous phase, evaluating the availability of relevant data, and determining the reliability of the data sources used. This step is crucial to ensure that the data gathered aligns with the business objectives and supports the overall goal of the analysis. A careful review of the collected data is essential to confirm its suitability for the analysis and to refine the approach if necessary.
+
+\section{\normalsize Data Collection}
+
+The data used in this analysis was sourced from the FutureLearn platform, which contains detailed engagement statistics for the course "Cyber Security: Safety At Home, Online, and in Life." The data set comprises multiple variables related to learners' interactions with the course videos, collected over the course of seven years. The raw data contains information on video statistics, such as total views, downloads, device usage, regional distribution, and video completion rates. This data, which is structured into specific rows corresponding to individual course video segments, provides a good source of insights into learner behavior and video performance.
+
+\section{\normalsize Exploring the Data}
+
+Upon gathering the dataset, the next step was to explore its contents in detail. This exploration involved reviewing the structure of the data, identifying any potential issues with data quality, investigating the variable types, and assessing whether the available data aligned with the research objectives.
+
+The dataset contains several key variables related to video engagement, including:
+
+•	Video Duration
+•	Total Views
+•	Total Downloads
+•	Total Caption Views
+•	Total Transcript Views
+•	Completion Rates (e.g., views at 5%, 50%, 100%)
+•	Device Usage (e.g., mobile, desktop, tablet, TV)
+•	Geographic Distribution (views by region)
+
+After reviewing the dataset, it was evident that it contained sufficient information to address the research question regarding learner engagement with video content. The data was collected consistently across all years, with clear variables representing learner interactions, such as video views, device types, and geographic regions. However, there were some nuances to consider, such as the lack of specific units of measurement for certain variables. This issue could complicate the interpretation of certain data points, but it was determined that this would not significantly affect the overall analysis, as the relationships between the key variables were still discernible.
+
+The next step in the exploration was to ensure that any gaps in the dataset, such as missing or incomplete data, would not impede the analysis. In this case, the dataset was found to be largely complete, with no major data quality issues identified.
+
+\section{\normalsize Summary of Findings}
+
+The key variables necessary for answering the research question were present, including video engagement metrics, device usage statistics, and geographic distribution of views. Although there were minor issues regarding the labeling of units and variable formats, these did not significantly hinder the ability to carry out the analysis. It was also noted that the dataset contained enough data points to meet the objectives of the research without the need to adjust the scope. The data was deemed reliable, with no major errors or discrepancies. Overall, the dataset was found to be well-suited for analysis, and the next step would involve preparing the data for further investigation in line with the objectives outlined in the business understanding phase.
+
+
+\section{\Large Data Preparation}
+
+Data preparation, involves cleansing, transforming, and selecting data in preparation for the modeling phase. The importance of this phase is to ensure that the dataset is in a consistent, tidy format that facilitates analysis and reduces the risk of errors. By normalizing the data and addressing any inconsistencies, this step ensures that the dataset is ready for detailed analysis, making the process more efficient and ensuring that future users of the data can confidently reproduce the results.
+
+\section{\normalsize Data Cleansing}
+
+The first step in the data preparation process involved categorizing each set of data. I identified the full set of variables present across the two years and compiled a list of variable names. These names were then applied to each variable in both years to standardize the dataset. This step helped ensure that the variables were easily interpretable and reduced potential confusion when working with the data, as well as separating specific data from both years with ease. All the data gathered from these two years (as we are just focusing on two years worth of data) where grouped into one group, and then separated into compartments in order to easily access each specific row with its own set of readings. The reason for this is to calculate each set quicker, and create a variety of ranges in order to conceive the correct data representation measurements, and expel results that would benefit our main research question.
+
+\section{\normalsize Data Wrangling}
+
+Following the data cleansing, I proceeded with the data wrangling phase, transforming and deriving variables from existing data to create a comprehensive dataset that maximized the available information for both years. The transformation process enabled me to ensure that the two datasets were aligned in terms of variables, facilitating direct comparisons between the two years. 
+
+This approach also improves the efficiency of code construction, as it allows for easy adaptation should additional years of data be added or if further automation is needed. The organization of the code and use of helper functions enhances its readability, making the analysis more accessible for anyone who may need to reproduce or evaluate the process in the future.
+
+After deriving the necessary variables, I ordered the columns into a common sequence, allowing for easier comparisons between the two years. This step ensured that the structure of the dataset remained consistent across both years, simplifying subsequent analysis.
+
+\section{\normalsize Data Combination}
+
+The next step in the wrangling process involved combining the two years’ data into a single, unified dataset. This task was done by using helper functions to identify any missing headers between the two datasets and adding these variables with ‘NA’ values where applicable. A new variable was created in each table to denote the year of the observation, ensuring that the data could later be split or analyzed by videos as needed. Finally, the columns were once again arranged in a standardized order, and all data from both years was appended into a single table.
+
+\section{\normalsize Analysis of the First Two sets of data}
+
+This analysis involved separating each row of data (representing different video segments) and calculating the mean of each variable across all observations for both years. By doing so, I was able to obtain a consolidated view of the video engagement statistics, providing a baseline from which comparisons could later be made with any other data input.
+
+The focus of this initial analysis was to explore the patterns of learner engagement with the course’s video content. By calculating the mean values for each video segment, I was able to determine the average performance across various metrics, such as total views, downloads, completion rates at various thresholds (e.g., 5%, 50%, 100%), and device usage percentages (e.g., mobile, desktop, tablet). This provided an overview of how learners interacted with the course videos during the first two years of its availability.
+
+Additionally, by comparing these metrics across the different video segments, I could identify which videos performed particularly well in terms of engagement and which videos might benefit from improvements or adjustments in future iterations of the course.
+
+
+\section{\Large Modelling} 
+
+The focus now shifts to applying appropriate modeling techniques to analyze the data and derive insights that can answer the research questions posed in the business objective. This phase leverages the structured and cleaned data from the previous steps, utilizing statistical and machine learning models to identify patterns, relationships, and trends. For this analysis, the data from the first two years were used to explore learner engagement with video content across different segments of the course, considering factors such as device type, geographic location, and engagement patterns. Various visualizations were created to model these relationships and gain insights into how these factors impact overall video performance.
+
+The following models were used to represent the data and explore key aspects of learner engagement:
+
+\section{\normalsize Bar Plot for Device Type Usage Percentage}
+
+The chart presents the percentage of usage for each device category 'Console, Desktop, Mobile, TV, Tablet, and Unknown' across the two years. The results indicate a clear preference for desktop devices, with a significant proportion of learners accessing the course materials through desktops and smartphones. This aligns with the growing trend of mobile learning, reflecting learners' preference for flexible access to educational content. The relatively lower percentages suggest that these devices are less commonly used for online learning activities.
+
+Interpretation: The bar plot highlights the increasing reliance on desktop but moving gradually to mobile devices for online learning, signaling a shift towards mobile first learning experiences. This finding suggests that course content should be optimized for mobile users, ensuring that it is easily accessible and engaging on smaller screens.
+
+```{r echo = FALSE, message=FALSE, warning=FALSE, include=FALSE}
+library(readr)
+X3_video_stats <- read_csv("cyber-security-3_video-stats.csv")
+X4_video_stats <- read_csv("cyber-security-4_video-stats.csv")
+X5_video_stats <- read_csv("cyber-security-5_video-stats.csv")
+X6_video_stats <- read_csv("cyber-security-6_video-stats.csv")
+X7_video_stats <- read_csv("cyber-security-7_video-stats.csv")
+
+
+```
+
+
+```{r echo = FALSE, message=FALSE, warning=FALSE, include=FALSE}
+# packages installation
+install.packages("dplyr")
+install.packages("purrr")
+library(dplyr)
+library(purrr)
+```
+
+```{r echo = FALSE}
+## Phase 1 of CRISP-DM
+
+
+## Analysis for the first 2 years of the data set.
+## Joining both data sets into one and rearranging rows so they are grouped together
+data_list_2_years <- list(X3_video_stats, X4_video_stats)
+
+combined_data1 <- map2_dfr(data_list_2_years, 3:4, ~mutate(.x, number = .y))
+
+grouped_data1 <- combined_data1 %>%
+    group_by(title) %>%
+    arrange(number)
+
+aggregate_data1 <- combined_data1 %>%
+    arrange(title, number)
+
+```
+
+```{r echo = FALSE}
+## Each row from the data set is extracted to create its own group
+welcome_data_1 <- grouped_data1 %>% filter(title == "Welcome to the course")
+Why_data_1 <- grouped_data1 %>% filter(title == "Why would anyone want your data?")
+preserving_privacy_1 <- grouped_data1 %>% filter(title == "Preserving privacy in cloud storage: privacy by design")
+staying_safe_1 <- grouped_data1 %>% filter(title == "Staying safe online: personal perspectives")
+privacy_on_of_1 <- grouped_data1 %>% filter(title == "Privacy online and offline")
+welcome_week2_1 <- grouped_data1 %>% filter(title == "Welcome to Week 2: payment security")
+exploring_online_1 <- grouped_data1 %>% filter(title == "Exploring vulnerabilities in online payments")
+million_dollar_1 <- grouped_data1 %>% filter(title == "The million dollar contactless payment")
+evolving_payment_1 <- grouped_data1 %>% filter(title == "The evolving arms race of payment security")
+welcome_week3_1 <- grouped_data1 %>% filter(title == "Welcome to Week 3: security in the future home")
+exploring_biometric_1 <- grouped_data1 %>% filter(title == "Exploring security: biometric authentication")
+exploring_live_lab_1 <- grouped_data1 %>% filter(title == "Exploring security: the Access Control Live Lab")
+devices_future_1 <- grouped_data1 %>% filter(title == "Devices in the future home")
+
+## This is to verify is we successfully extracted only the two values from each year independently from the rest of the data
+
+
+## All groups are joined into one data system that separates each values depending on the question analysis
+data_list_1 <- list(welcome_data_1 <- grouped_data1 %>% filter(title == "Welcome to the course"),
+                Why_data_1 <- grouped_data1 %>% filter(title == "Why would anyone want your data?"),
+                preserving_privacy_1 <- grouped_data1 %>% filter(title == "Preserving privacy in cloud storage: privacy by design"),
+                staying_safe_1 <- grouped_data1 %>% filter(title == "Staying safe online: personal perspectives"),
+                privacy_on_of_1 <- grouped_data1 %>% filter(title == "Privacy online and offline"),
+                welcome_week2_1 <- grouped_data1 %>% filter(title == "Welcome to Week 2: payment security"),
+                exploring_online_1 <- grouped_data1 %>% filter(title == "Exploring vulnerabilities in online payments"),
+                million_dollar_1 <- grouped_data1 %>% filter(title == "The million dollar contactless payment"),
+                evolving_payment_1 <- grouped_data1 %>% filter(title == "The evolving arms race of payment security"),
+                welcome_week3_1 <- grouped_data1 %>% filter(title == "Welcome to Week 3: security in the future home"),
+                exploring_biometric_1 <- grouped_data1 %>% filter(title == "Exploring security: biometric authentication"),
+                exploring_live_lab_1 <- grouped_data1 %>% filter(title == "Exploring security: the Access Control Live Lab"),
+                devices_future_1 <- grouped_data1 %>% filter(title == "Devices in the future home"))
+
+```
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+## From all the data, now we can calculate the mean for each set of questions for both years results.
+mean_values_all <- lapply(welcome_data_1, function(df) {
+    sapply(df, function(col) if(is.numeric(col)) mean(col, na.rm = TRUE) else NA)
+})
+
+## This just joined all 2 sets of data into 1 group
+
+
+## With this code we can proceed to calculate the mean
+overall_means_1 <- sapply(mean_values_all, function(x) mean(unlist(x), na.rm = TRUE))
+```
+
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+# Install and load the gt package
+install.packages("gt")
+library(gt)
+
+# Split the data into a data frame with metric names and corresponding values
+means_df <- data.frame(
+  Metric = names(overall_means_1),
+  Value = round(overall_means_1, 2)
+)
+
+# Replacing the underscores with spaces in the Metric names
+means_df$Metric <- gsub("_", " ", means_df$Metric)
+
+# Manually split the data into 4 columns for both metrics and values
+metrics_split <- data.frame(
+  Metric1 = means_df$Metric[1:7],
+  Metric2 = means_df$Metric[8:14],
+  Metric3 = means_df$Metric[15:21],
+  Metric4 = means_df$Metric[22:28]
+)
+
+values_split <- data.frame(
+  Value1 = means_df$Value[1:7],
+  Value2 = means_df$Value[8:14],
+  Value3 = means_df$Value[15:21],
+  Value4 = means_df$Value[22:28]
+)
+
+# Create the metrics table using `gt` package
+metrics_table <- metrics_split %>%
+  gt() %>%
+  tab_header(title = "Overall Metrics for Two Years") %>%
+  tab_style(style = list(cell_text(size = "small")), locations = cells_body()) %>%
+  tab_style(style = list(cell_text(weight = "bold")), locations = cells_column_labels())
+
+# Create the values table using `gt` package
+values_table <- values_split %>%
+  gt() %>%
+  tab_header(title = "Overall Values for Two Years") %>%
+  tab_style(style = list(cell_text(size = "small")), locations = cells_body())
+
+# Print both tables
+metrics_table
+values_table
+
+
+```
+
+```{r echo=FALSE, message=FALSE, fig.width=9, fig.height=3.5}
+## REPRESENTING THE DATA WITH VISUALIZATIONS
+
+## BAR PLOTS for device and regional data (Percentage)
+
+## Preparing the data for the Bar Plot chart
+device_data_1 <- data.frame(
+    category = c("Console", "Desktop", "Mobile", "TV", "Tablet", "Unknown"),
+    percentage = c(overall_means_1["console_device_percentage"],
+                   overall_means_1["desktop_device_percentage"],
+                   overall_means_1["mobile_device_percentage"],
+                   overall_means_1["tv_device_percentage"],
+                   overall_means_1["tablet_device_percentage"],
+                   overall_means_1["unknown_device_percentage"])
+)
+
+## Loading necessary packages
+if (!require(ggplot2)) install.packages("ggplot2")
+
+## Package that will be used to carry this plot
+install.packages("ggplot2")
+library(ggplot2)
+
+# Creating the Bar Plot chart
+ggplot(device_data_1, aes(x = category, y = percentage)) +
+    geom_bar(stat = "identity", fill = "#c8a530") +
+    labs(title = "Device Type Usage Percentage", y = "Percentage", x = "Device Type") +
+    theme_minimal() +
+  theme(plot.title = element_text(size = 15, hjust = 0.5),      # Title font size
+        axis.title.x = element_text(size = 10),                 # X-axis label font size
+        axis.title.y = element_text(size = 10),                 # Y-axis label font size
+        axis.text.x = element_text(size = 10),                  # X-axis tick label font size
+        axis.text.y = element_text(size = 10),                  # Y-axis tick label font size
+        legend.text = element_text(size = 10)                   # Legend text size
+        )     
+```
+
+\section{\normalsize Bar Plot for Regional Distribution of Learner Engagement}
+
+The graph reveals that Europe and Asia are the largest regions contributing to overall engagement, followed by Africa and North America. The smaller percentages for regions such as Oceania, South America, and Antarctica suggest that these areas have a lower proportion of learners participating in the course.
+
+Interpretation: The regional bar plot provides insight into the global reach of the course, indicating that the course content has wider engagement in certain regions, particularly in Europe and Asia. This geographic trend may influence future decisions regarding localized content, targeted marketing, or regional adjustments in course delivery to improve engagement in less represented regions.
+
+```{r echo = FALSE, fig.width=9, fig.height=3.5}
+## BAR PLOTS for regional distribution
+
+## Preparing the data for the Bar Plot chart
+library(ggplot2)
+
+region_data_1 <- data.frame(
+    region = c("Europe", "Oceania", "Asia", "North America", "South America",
+               "Africa", "Antarctica"),
+    percentage = c(overall_means_1["europe_views_percentage"],
+                   overall_means_1["oceania_views_percentage"],
+                   overall_means_1["asia_views_percentage"],
+                   overall_means_1["north_america_views_percentage"],
+                   overall_means_1["south_america_views_percentage"],
+                   overall_means_1["africa_views_percentage"],
+                   overall_means_1["antarctica_views_percentage"])
+)
+
+## Creating the Bar Plot chart
+ggplot(region_data_1, aes(x = region, y = percentage)) +
+    geom_bar(stat = "identity", fill = "#f3da4c") +
+    labs(title = "Views by Region Percentage", y = "Percentage", x = "Region") +
+    theme_minimal() +  
+  theme(plot.title = element_text(size = 15, hjust = 0.5),      # Title font size
+        axis.title.x = element_text(size = 10),                 # X-axis label font size
+        axis.title.y = element_text(size = 10),                 # Y-axis label font size
+        axis.text.x = element_text(size = 10),                  # X-axis tick label font size
+        axis.text.y = element_text(size = 10),                  # Y-axis tick label font size
+        legend.text = element_text(size = 10)                   # Legend text size
+        )     
+```
+
+\section{\normalsize Line Plot for Engagement Metrics Across Different Levels}
+
+The chart shows the percentage of viewers who watched varying amounts of each video, from 5% up to 100%. The results suggest that there is a noticeable drop in engagement after the initial 5% of the video, with significant declines as the video progresses. However, it does show that the 100% completion rates still achieve a reasonable percentage of views.
+
+Interpretation: The line plot reveals typical video consumption patterns, with a large initial drop-off in viewer engagement. This suggests that learners tend to lose interest early in the video or that the content might be less engaging at the start. This insight calls for improvements in the introduction or opening segments of the course videos to retain learner attention and encourage deeper engagement throughout the video. Additionally, strategies such as adding interactive elements or breaking the content into smaller, more digestible segments may help maintain engagement across the video.
+
+```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=9, fig.height=3.5}
+## LINE PLOT for engagement Metrics
+
+## The factor converts the engagement_level_1 order, so it displays in the intended order wanted
+## Preparing the data for Line chart
+engagement_data_1 <- data.frame(
+    engagement_level_1 = factor(
+        c("5%", "10%", "25%", "50%", "75%", "95%", "100%"),
+        levels = c("5%", "10%", "25%", "50%", "75%", "95%", "100%")
+    ),
+    percentage_1 = c(overall_means_1["viewed_five_percent"],
+                   overall_means_1["viewed_ten_percent"],
+                   overall_means_1["viewed_twentyfive_percent"],
+                   overall_means_1["viewed_fifty_percent"],
+                   overall_means_1["viewed_seventyfive_percent"],
+                   overall_means_1["viewed_ninetyfive_percent"],
+                   overall_means_1["viewed_onehundred_percent"])
+)
+
+## Creating the Line Plot chart
+ggplot(engagement_data_1, aes(x = engagement_level_1, y = percentage_1, group = 1)) +
+    geom_line(color = "#f3da4c", linewidth =1) +
+    geom_point(color = "#c8a530", linewidth = 2) +
+    labs(title = "Video Engagement Levels", y = "Percentage Viewed", x = "Engagement Level") +
+    theme_minimal() +  
+  theme(plot.title = element_text(size = 15, hjust = 0.5),      # Title font size
+        axis.title.x = element_text(size = 10),                 # X-axis label font size
+        axis.title.y = element_text(size = 10),                 # Y-axis label font size
+        axis.text.x = element_text(size = 10),                  # X-axis tick label font size
+        axis.text.y = element_text(size = 10),                  # Y-axis tick label font size
+        legend.text = element_text(size = 10)                   # Legend text size
+        )     
+```
+
+\section{\normalsize Heatmap for Engagement and Device Metrics}
+
+The data points represent the average percentage of engagement for each device type at various levels of video consumption (from 5% to 100%). The heatmap indicates that desktop devices show higher engagement percentages at the lower viewing levels (e.g., 5%, 10%, 25%) compared to other device types. However, there is a noticeable decrease in engagement as the viewing level increases, especially for mobile and tablet devices.
+
+Interpretation: The heatmap provides a visual correlation between device usage and engagement levels. Desktop devices, while leading in early engagement, seem to experience higher drop-off rates as the video progresses. This suggests that while desktop devices are preferred for accessing content, engagement strategies should be refined to improve retention, particularly for mobile users. It may be worth exploring whether different forms of content, such as videos optimized for smaller screens or supplementary interactive materials, could enhance the viewing experience on mobile devices.
+
+\vspace{5mm}
+
+```{r echo = FALSE, fig.width=9, fig.height=3.5}
+# Preparing the data for the Heatmap
+heatmap_data_1 <- data.frame(
+    category = factor(c("5%", "10%", "25%", "50%", "75%", "95%", "100%",
+                        "Console", "Desktop", "Mobile", "TV", "Tablet", "Unknown"),
+                      levels = c("5%", "10%", "25%", "50%", "75%", "95%", "100%",
+                                 "Console", "Desktop", "Mobile", "TV", "Tablet", "Unknown")),
+    value = c(overall_means_1["viewed_five_percent"],
+              overall_means_1["viewed_ten_percent"],
+              overall_means_1["viewed_twentyfive_percent"],
+              overall_means_1["viewed_fifty_percent"],
+              overall_means_1["viewed_seventyfive_percent"],
+              overall_means_1["viewed_ninetyfive_percent"],
+              overall_means_1["viewed_onehundred_percent"],
+              overall_means_1["console_device_percentage"],
+              overall_means_1["desktop_device_percentage"],
+              overall_means_1["mobile_device_percentage"],
+              overall_means_1["tv_device_percentage"],
+              overall_means_1["tablet_device_percentage"],
+              overall_means_1["unknown_device_percentage"])
+)
+
+# Creating the Heatmap
+ggplot(heatmap_data_1, aes(x = "", y = category, fill = value)) +
+    geom_tile(color = "white") +
+    scale_fill_gradient(low = "#f3da4c", high = "#c8a530") +
+    labs(title = "Heatmap of Engagement and Device Metrics", x = "", y = "Metrics") +
+    theme_minimal() +  
+  theme(plot.title = element_text(size = 15, hjust = 0.5),      # Title font size
+        axis.title.x = element_text(size = 10),                 # X-axis label font size
+        axis.title.y = element_text(size = 10),                 # Y-axis label font size
+        axis.text.x = element_text(size = 10),                  # X-axis tick label font size
+        axis.text.y = element_text(size = 10),                  # Y-axis tick label font size
+        legend.text = element_text(size = 10)                   # Legend text size
+        )     
+
+```
+
+\section{\normalsize Bubble Chart for Combined Engagement and Device Metrics}
+
+The size of each bubble corresponds to the percentage value of either engagement or device usage, while the color differentiates between engagement levels and device types. This chart offers a clear comparison between how various devices impact the engagement levels and highlights the significant variance in engagement across devices.
+
+Interpretation: The bubble chart illustrates the correlation between the device used and the engagement level, with desktop devices showing higher engagement at the lower levels of video consumption. The size of the bubbles allows for a quick comparison of the relative importance of each category. This visualization reinforces the need for mobile optimized content to cater to the majority of learners engaging through mobile devices.
+
+\vspace{5mm}
+
+```{r echo = FALSE, fig.width=9, fig.height=3.5}
+## BUBBLE GRAPGH for Engagement and Device Metrics Combined
+
+## Loading the ggplot2 package
+library(ggplot2)
+
+## Preparing the data for bubble chart
+bubble_data_1 <- data.frame(
+    category = c("Viewed 5%", "Viewed 10%", "Viewed 25%", "Viewed 50%", "Viewed 75%", "Viewed 95%", "Viewed 100%",
+                 "Console", "Desktop", "Mobile", "TV", "Tablet", "Unknown"),
+    type = c(rep("Engagement", 7), rep("Device", 6)),  # Classify as Engagement or Device
+    value = c(overall_means_1["viewed_five_percent"],
+              overall_means_1["viewed_ten_percent"],
+              overall_means_1["viewed_twentyfive_percent"],
+              overall_means_1["viewed_fifty_percent"],
+              overall_means_1["viewed_seventyfive_percent"],
+              overall_means_1["viewed_ninetyfive_percent"],
+              overall_means_1["viewed_onehundred_percent"],
+              overall_means_1["console_device_percentage"],
+              overall_means_1["desktop_device_percentage"],
+              overall_means_1["mobile_device_percentage"],
+              overall_means_1["tv_device_percentage"],
+              overall_means_1["tablet_device_percentage"],
+              overall_means_1["unknown_device_percentage"])
+)
+
+## Creating the bubble chart
+ggplot(bubble_data_1, aes(x = type, y = category, size = value, color = type)) +
+    geom_point(alpha = 0.7) +
+    scale_size(range = c(3, 15), name = "Value of Shape") +
+    scale_color_manual(values = c("Device" = "#f3da4c", "Engagement" = "#c8a530")) +
+    labs(title = "Bubble Chart of Engagement and Device Metrics", x = "Category Type", y = "Metric") +
+    theme_minimal() +
+    theme(legend.position = "right") +  
+  theme(plot.title = element_text(size = 15, hjust = 0.5),      # Title font size
+        axis.title.x = element_text(size = 10),                 # X-axis label font size
+        axis.title.y = element_text(size = 10),                 # Y-axis label font size
+        axis.text.x = element_text(size = 10),                  # X-axis tick label font size
+        axis.text.y = element_text(size = 10),                  # Y-axis tick label font size
+        legend.text = element_text(size = 10)                   # Legend text size
+        ) + 
+    coord_cartesian(clip = "off") 
+```
+
+\section{\Large Round 1 Evaluation}
+
+Phase 1 of CRISP-DM provided valuable insights into learner engagement across device types, geographic locations, and viewing behaviors. The structured data preparation enabled seamless analysis, while a variety of visualizations clarified key engagement patterns. For example, bar plots revealed a preference for desktop device access, regional distribution highlighted higher engagement in Europe and Asia, and line plots showed significant early video drop-offs. Additionally, heatmaps and bubble charts underscored device-specific engagement patterns, indicating that mobile users may need targeted retention strategies due to their higher initial engagement but quicker drop-off rates. These visualizations provided a foundational understanding of when and how engagement declined, suggesting the need for a more compelling early course design to retain interest.
+
+This analysis reveals that early video drop-offs and device-specific patterns are critical areas for optimizing course content. The findings underscore the importance of mobile optimization and engagement strategies, particularly in regions with high viewer numbers. Although the two-year dataset provides substantial insights, incorporating additional years and data on session duration or demographic segmentation would enhance the reliability and granularity of future evaluations. Moving forward, these results will guide adaptations in content pacing, device-specific engagement tactics, and regionally tailored outreach, thereby supporting a more effective, learner-centered course design.
+
+\section{\Large Round 2 of the CRISP-DM Cycle}
+
+
+\section{\Large Business Understanding Review}
+
+Following the results from Phase 1, which provided foundational insights into learner engagement for MOOC, the objectives of this analysis continue to focus on understanding how learners interact with course video content. With no obstacles identified in Phase 1, the analysis now shifts to a longitudinal approach, investigating changes in learner engagement over a broader five year period, incorporating data from three additional years.
+
+The refined research question for this second phase is as follows:
+
+"How has learner engagement with video content evolved over the 5-year period, and what trends can be observed in device usage, geographic location, and completion rates across the years?"
+
+This question is pertinent given the observable shifts in digital education and learner behavior over time. The analysis will offer stakeholders—course designers, educators, and platform administrators deeper insights into longitudinal engagement trends and device and regional variations. The goal is to identify persistent engagement patterns, areas for improvement, and targeted strategies to enhance learner retention and content relevance. Given that Phase 1 objectives and success criteria were met, this analysis will proceed with the existing scope and measures.
+
+\section{\Large Data Understanding}
+
+This phase necessitates a fresh examination of the data to ensure its suitability for answering the new research question. Given the focus on trends across three additional years, any data limitations or structural changes need addressing to ensure consistency. The initial analysis confirmed the adequacy and reliability of the core dataset from FutureLearn, and the same source will support this expanded analysis.
+
+The data set now spans five years and includes variables crucial for understanding engagement trends, such as video views, device usage, geographic location, and completion rates. As in Phase 1, the data quality is consistent, though some adjustments, such as standardizing variable labels across years, may be required for coherence.
+
+The completeness and reliability of the data suggest that it is well-suited for this expanded analysis, with minimal adjustments needed. The data will be prepared for Phase 2’s deeper analysis by deriving new variables that encapsulate the multi year trends.
+
+\section{\Large Data Preparation}
+
+The data from each year is cleansed and formatted to maintain consistency across variables, facilitating reliable year over year comparisons, similar t phase 1 preparation.
+
+Data Standardization: All variable names and data structures were standardized across all years, ensuring that each dataset conformed to a uniform structure.
+
+Derived Variables: New variables were created to capture year over year trends, including multi-year averages and year-specific summaries for each variable.
+
+Data Binning: To simplify trend analysis, continuous variables like completion rates and total views were binned into categories based on predefined thresholds. This binning enables clearer visual comparisons and insights into engagement patterns.
+
+Consolidation and Grouping: The data from each year was combined into a unified dataset with an identifier for each year, facilitating longitudinal analysis. Helper functions were applied to manage missing headers across years, ensuring uniform data structure.
+
+These steps resulted in a structured dataset ready for modeling and longitudinal analysis, providing a clear foundation for evaluating changes in engagement trends over the years.
+
+\section{\Large Modelling}
+
+In Phase 2, the analysis shifts to modeling learner engagement across five years, examining how video interaction, device usage, geographic location, and completion rates have evolved. The modeling process centers on identifying trends and relationships that emerge over time, as well as pinpointing any significant variations in how learners interact with the course content.
+
+\section{\normalsize Trends in Learner Engagement}
+
+To capture changes in engagement over the five-year period, several visualizations were employed, each providing insight into different facets of learner behavior. The line graph with facets is particularly useful for understanding shifts in engagement metrics, such as video views and device usage, over time. By plotting these metrics separately for each year, we can observe distinct patterns across categories like "Viewed 5%" to "Viewed 100%" and device preferences (e.g., mobile, desktop, tablet). For example, the line graph reveals whether there has been a consistent increase or decrease in learner interaction with the course videos, particularly in the percentage of views completed and the devices used for accessing the content.
+
+```{r echo = FALSE}
+## Phase 2 of CRISP-DM
+
+library(dplyr)
+library(purrr)
+
+## Analysis for all years of the data set.
+## Joining all data sets into one and rearranging rows so they are grouped together
+data_list_all_years <- list(X3_video_stats, X4_video_stats, X5_video_stats,
+                  X6_video_stats, X7_video_stats)
+
+combined_data_2 <- map2_dfr(data_list_all_years, 3:7, ~mutate(.x, number = .y))
+
+grouped_data_2 <- combined_data_2 %>%
+    group_by(title) %>%
+    arrange(number)
+
+aggregate_data_2 <- combined_data_2 %>%
+    arrange(title, number)
+```
+
+```{r echo = FALSE}
+## Each row from all the data set is extracted to create its own group
+welcome_data_2 <- grouped_data_2 %>% filter(title == "Welcome to the course")
+Why_data_2 <- grouped_data_2 %>% filter(title == "Why would anyone want your data?")
+preserving_privacy_2 <- grouped_data_2 %>% filter(title == "Preserving privacy in cloud storage: privacy by design")
+staying_safe_2 <- grouped_data_2 %>% filter(title == "Staying safe online: personal perspectives")
+privacy_on_of_2 <- grouped_data_2 %>% filter(title == "Privacy online and offline")
+welcome_week2_2 <- grouped_data_2 %>% filter(title == "Welcome to Week 2: payment security")
+exploring_online_2 <- grouped_data_2 %>% filter(title == "Exploring vulnerabilities in online payments")
+million_dollar_2 <- grouped_data_2 %>% filter(title == "The million dollar contactless payment")
+evolving_payment_2 <- grouped_data_2 %>% filter(title == "The evolving arms race of payment security")
+welcome_week3_2 <- grouped_data_2 %>% filter(title == "Welcome to Week 3: security in the future home")
+exploring_biometric_2 <- grouped_data_2 %>% filter(title == "Exploring security: biometric authentication")
+exploring_live_lab_2 <- grouped_data_2 %>% filter(title == "Exploring security: the Access Control Live Lab")
+devices_future_2 <- grouped_data_2 %>% filter(title == "Devices in the future home")
+
+## This is to verify is we successfully extracted only the two values from each year independently from the rest of the data
+
+
+```
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+## All groups are joined into one data system that separates each values depending on the question analysis
+data_list_2 <- list(welcome_data_2 <- grouped_data_2 %>% filter(title == "Welcome to the course"),
+                    Why_data_2 <- grouped_data_2 %>% filter(title == "Why would anyone want your data?"),
+                    preserving_privacy_2 <- grouped_data_2 %>% filter(title == "Preserving privacy in cloud storage: privacy by design"),
+                    staying_safe_2 <- grouped_data_2 %>% filter(title == "Staying safe online: personal perspectives"),
+                    privacy_on_of_2 <- grouped_data_2 %>% filter(title == "Privacy online and offline"),
+                    welcome_week2_2 <- grouped_data_2 %>% filter(title == "Welcome to Week 2: payment security"),
+                    exploring_online_2 <- grouped_data_2 %>% filter(title == "Exploring vulnerabilities in online payments"),
+                    million_dollar_2 <- grouped_data_2 %>% filter(title == "The million dollar contactless payment"),
+                    evolving_payment_2 <- grouped_data_2 %>% filter(title == "The evolving arms race of payment security"),
+                    welcome_week3_2 <- grouped_data_2 %>% filter(title == "Welcome to Week 3: security in the future home"),
+                    exploring_biometric_2 <- grouped_data_2 %>% filter(title == "Exploring security: biometric authentication"),
+                    exploring_live_lab_2 <- grouped_data_2 %>% filter(title == "Exploring security: the Access Control Live Lab"),
+                    devices_future_2 <- grouped_data_2 %>% filter(title == "Devices in the future home"))
+
+## From all the data, now we can calculate the mean for each set of questions for both years results.
+mean_values_all_2 <- lapply(welcome_data_2, function(df) {
+    sapply(df, function(col) if(is.numeric(col)) mean(col, na.rm = TRUE) else NA)
+})
+
+## This just joined all 2 sets of data into 1 group
+
+
+## With this code we can proceed to calculate the mean
+overall_means_2 <- sapply(mean_values_all_2, function(x) mean(unlist(x), na.rm = TRUE))
+
+
+# Install and load the gt package
+install.packages("gt")
+library(gt)
+
+# Split the data into a data frame with metric names and corresponding values
+means_df <- data.frame(
+  Metric = names(overall_means_2),
+  Value = round(overall_means_2, 2)
+)
+
+# Replacing the underscores with spaces in the Metric names
+means_df$Metric <- gsub("_", " ", means_df$Metric)
+
+# Manually split the data into 4 columns for both metrics and values
+metrics_split <- data.frame(
+  Metric1 = means_df$Metric[1:7],
+  Metric2 = means_df$Metric[8:14],
+  Metric3 = means_df$Metric[15:21],
+  Metric4 = means_df$Metric[22:28]
+)
+
+values_split <- data.frame(
+  Value1 = means_df$Value[1:7],
+  Value2 = means_df$Value[8:14],
+  Value3 = means_df$Value[15:21],
+  Value4 = means_df$Value[22:28]
+)
+
+# Create the metrics table using `gt` package
+metrics_table <- metrics_split %>%
+  gt() %>%
+  tab_header(title = "Overall Metrics for All 5 Years") %>%
+  tab_style(style = list(cell_text(size = "small")), locations = cells_body()) %>%
+  tab_style(style = list(cell_text(weight = "bold")), locations = cells_column_labels())
+
+# Create the values table using `gt` package
+values_table <- values_split %>%
+  gt() %>%
+  tab_header(title = "Overall Values for All 5 Years") %>%
+  tab_style(style = list(cell_text(size = "small")), locations = cells_body())
+
+# Print both tables
+metrics_table
+values_table
+
+
+```
+
+```{r echo = FALSE, message=FALSE}
+## REPRESENTING THE DATA WITH VISUALIZATIONS
+
+## Loading necessary packages
+if (!require(tidyr)) install.packages("tidyr")
+if (!require(ggplot2)) install.packages("ggplo2")
+```
+
+```{r echo = FALSE, message=FALSE, fig.width=9, fig.height=3.5}
+## LINE GRAPH with Facets
+
+## Loading necessary packages
+# Install dplyr package if not already installed
+if (!require(dplyr)) install.packages("dplyr")
+
+# Load the dplyr package
+library(dplyr)
+install.packages("tidyr")
+library(ggplot2)
+library(tidyr)
+
+
+## Preparing the data for the Line Graph with Facets
+## Combining overall_means_1 and overall_means_2 into one data frame
+## The factor converts the category so the order in how we want the data to be displayed shows
+combined_means <- data.frame(
+    category = factor(c("viewed 5%", "viewed 10%", "viewed 20%",
+                        "viewed 50%", "viewed 75%", "viewed 95%",
+                        "viewed 100%", "console device %", "desktop device %",
+                        "mobile device %", "tv device %", "tablet device %",
+                        "unknown device %"),
+                      levels = c ("viewed 5%", "viewed 10%", "viewed 20%",
+                                  "viewed 50%", "viewed 75%", "viewed 95%",
+                                  "viewed 100%", "console device %", "desktop device %",
+                                  "mobile device %", "tv device %", "tablet device %",
+                                  "unknown device %")),
+    overall_means_1 = c(overall_means_1["viewed_five_percent"],
+                        overall_means_1["viewed_ten_percent"],
+                        overall_means_1["viewed_twentyfive_percent"],
+                        overall_means_1["viewed_fifty_percent"],
+                        overall_means_1["viewed_seventyfive_percent"],
+                        overall_means_1["viewed_ninetyfive_percent"],
+                        overall_means_1["viewed_onehundred_percent"],
+                        overall_means_1["console_device_percentage"],
+                        overall_means_1["desktop_device_percentage"],
+                        overall_means_1["mobile_device_percentage"],
+                        overall_means_1["tv_device_percentage"],
+                        overall_means_1["tablet_device_percentage"],
+                        overall_means_1["unknown_device_percentage"]),
+    overall_means_2 = c(overall_means_2["viewed_five_percent"],
+                        overall_means_2["viewed_ten_percent"],
+                        overall_means_2["viewed_twentyfive_percent"],
+                        overall_means_2["viewed_fifty_percent"],
+                        overall_means_2["viewed_seventyfive_percent"],
+                        overall_means_2["viewed_ninetyfive_percent"],
+                        overall_means_2["viewed_onehundred_percent"],
+                        overall_means_2["console_device_percentage"],
+                        overall_means_2["desktop_device_percentage"],
+                        overall_means_2["mobile_device_percentage"],
+                        overall_means_2["tv_device_percentage"],
+                        overall_means_2["tablet_device_percentage"],
+                        overall_means_2["unknown_device_percentage"]))
+
+
+## Reshaping the data into long formats
+combined_means_long <- pivot_longer(combined_means, cols = starts_with("overall_means"),
+                                    names_to = "phase", values_to = "value")
+
+## Replacing phase labels
+combined_means_long$phase <- recode(combined_means_long$phase, 
+                                    "overall_means_1" = "Overall Means 1", 
+                                    "overall_means_2" = "Overall Means 2")
+
+## Plotting line graph with facets for each phase
+ggplot(combined_means_long, aes(x = category, y = value, colour = phase, group = phase)) +
+    geom_line() +
+    facet_wrap(~ phase, scales = "free_y") +
+    scale_colour_manual(values = c("Overall Means 1" = "#f3da4c", "Overall Means 2" = "#c8a530")) +
+    theme_minimal() +
+    labs(title = "Line Graph of Engagement and Device Metrics by Phase", x = "Category", y = "Value") +
+    theme(
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+        axis.title.x = element_text(size = 10),
+        strip.text = element_text(size = 14),
+        plot.title = element_text(size = 15, hjust = 0.5),
+        axis.text.y = element_text(size = 10)
+    ) +  theme(plot.title = element_text(size = 15, hjust = 0.5),      # Title font size
+        axis.title.x = element_text(size = 10),                 # X-axis label font size
+        axis.title.y = element_text(size = 10),                 # Y-axis label font size
+        axis.text.x = element_text(size = 10),                  # X-axis tick label font size
+        axis.text.y = element_text(size = 10),                  # Y-axis tick label font size
+        legend.text = element_text(size = 10)                   # Legend text size
+        )     
+```
+
+Moreover, the LOESS smoothing plot complements the line graph by providing a smoothed trend line that visualizes the overall engagement patterns across categories. This plot allows us to see how engagement levels evolve, accounting for any fluctuations while helping to identify long-term trends. The smoothed curves show how certain categories (e.g., mobile device usage or completion rates) have experienced notable growth or decline, highlighting shifts in learner behavior over time.
+
+These visualizations provide clear evidence of engagement trends and device usage patterns across the five-year period, confirming the longitudinal shifts in how learners are interacting with the course content. The combination of line graphs and LOESS smoothing offers a comprehensive understanding of engagement dynamics.
+
+\vspace{5mm}
+
+```{r echo = FALSE, message=FALSE, results='hide', fig.width=9, fig.height=3.5}
+## LOESS SMOOTHING PLOT for a selected categories
+
+## Preparing the data for LOES smoothing
+ggplot(combined_means_long, aes(x = category, y = value, color = phase)) +
+    geom_point() +
+    geom_smooth(method = "loess", se = FALSE) +
+    scale_colour_manual(values = c("Overall Means 1" = "#f3da4c", "Overall Means 2" = "#c8a530")) +
+    labs(title = "LOESS Smoothing Plot for Engagement Metrics", x = "Category", y = "Value") +
+    theme_minimal() +
+    theme(
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 10), # Rotating and adjusting the angle
+        axis.title.x = element_text(size=12),                         # Adjusting x-axis title size
+        strip.text = element_text(size=14),                           # Adjusting facet label size
+        plot.title = element_text(size=16, hjust = 0.5),              # Adjusting plot title size
+        axis.text.y = element_text(size=10)                           # Adjusting y -axis label size
+    ) + theme(plot.title = element_text(size = 15, hjust = 0.5),      # Title font size
+        axis.title.x = element_text(size = 10),                 # X-axis label font size
+        axis.title.y = element_text(size = 10),                 # Y-axis label font size
+        axis.text.x = element_text(size = 10),                  # X-axis tick label font size
+        axis.text.y = element_text(size = 10),                  # Y-axis tick label font size
+        legend.text = element_text(size = 10)                   # Legend text size
+        ) 
+```
+
+\section{\normalsize Device Usage and Geographic Distribution}
+
+The heatmap and grouped bar chart provide insights into device preferences and regional variations in learner engagement. The heatmap compares metrics across phases, displaying differences in engagement across video categories and phases. By observing the color gradients in the heatmap, we can easily identify which devices have seen a rise in usage over the years, as well as which metrics (e.g., "Viewed 50%" or "Viewed 100%") show the most significant changes. This is especially valuable for understanding how different types of devices (desktop, mobile, tablet, etc.) contribute to overall engagement.
+
+```{r echo = FALSE, fig.width=9, fig.height=3.5}
+## HEATMAP comparing all data gathered from all years
+
+## Preparing the data for the heat map
+heatmap_data_2 <- data.frame(
+    title = c("Viewed 5%", "Viewed 10%", "Viewed 25%", "Viewed 50%", "Viewed 75%", "Viewed 95%", "Viewed 100%",
+              "Console", "Desktop", "Mobile", "TV", "Tablet", "Unknown"),
+    phase1_value = overall_means_1[c("viewed_five_percent", "viewed_ten_percent", "viewed_twentyfive_percent",
+                                     "viewed_fifty_percent", "viewed_seventyfive_percent", "viewed_ninetyfive_percent",
+                                     "viewed_onehundred_percent", "console_device_percentage", "desktop_device_percentage",
+                                     "mobile_device_percentage", "tv_device_percentage", "tablet_device_percentage",
+                                     "unknown_device_percentage")],
+    phase2_value = overall_means_2[c("viewed_five_percent", "viewed_ten_percent", "viewed_twentyfive_percent",
+                                     "viewed_fifty_percent", "viewed_seventyfive_percent", "viewed_ninetyfive_percent",
+                                     "viewed_onehundred_percent", "console_device_percentage", "desktop_device_percentage",
+                                     "mobile_device_percentage", "tv_device_percentage", "tablet_device_percentage",
+                                     "unknown_device_percentage")]
+)
+
+
+## Rearranging the order to make the graph more understandable
+heatmap_data_2$title <- factor(heatmap_data_2$title,
+                               levels = c( "Unknown", "Tablet", "TV", "Mobile", "Desktop",
+                                           "Console", "Viewed 100%", "Viewed 95%",
+                                           "Viewed 75%", "Viewed 50%", "Viewed 25%",
+                                           "Viewed 10%", "Viewed 5%"))
+
+## Reshaping the data
+heatmap_data_long <- pivot_longer(heatmap_data_2, cols = starts_with("phase"), names_to = "phase", values_to = "value")
+
+## Plotting the heatmap
+ggplot(heatmap_data_long, aes(x = phase, y = title, fill = value)) +
+    geom_tile() +
+    geom_tile(color = "white") +
+    scale_fill_gradient(low = "#f3da4c", high = "#c8a530") +  # Replace with your color choices
+    labs(title = "Heatmap for Engagement Metrics by Phase and Video Title", x = "Phase", y = "Metric") +
+    theme_minimal() + 
+  theme(plot.title = element_text(size = 15, hjust = 0.5),      # Title font size
+        axis.title.x = element_text(size = 10),                 # X-axis label font size
+        axis.title.y = element_text(size = 10),                 # Y-axis label font size
+        axis.text.x = element_text(size = 10),                  # X-axis tick label font size
+        axis.text.y = element_text(size = 10),                  # Y-axis tick label font size
+        legend.text = element_text(size = 10)                   # Legend text size
+        ) 
+```
+
+The grouped bar chart further illustrates regional engagement differences, showing how engagement metrics vary by region (Europe, North America, Asia, etc.). By comparing engagement rates across regions for each phase, we gain insight into how learners from different parts of the world engage with the content and how regional trends evolve. For example, we can analyze whether certain regions show an increase in mobile device usage, or if geographic shifts in learner behavior correlate with completion rates.
+
+Together, these visualizations suggest that device preferences have changed over time, with a noticeable rise in mobile device usage, particularly in the later phases. Similarly, regional trends indicate that learners from certain regions may have increasingly relied on specific devices or demonstrated higher engagement levels in certain years.
+
+\vspace{5mm} 
+
+```{r echo = FALSE, fig.width=9, fig.height=3.5}
+## GROUPED BAR CHART for regional views
+
+## Preparing the data for the Bar Chart
+regional_views <- data.frame(
+    region = c("Europe", "Oceania", "Asia", "North America", "South America", "Africa"),
+    overall_means_1 = c(overall_means_1["europe_views_percentage"],
+                        overall_means_1["oceania_views_percentage"],
+                        overall_means_1["asia_views_percentage"],
+                        overall_means_1["north_america_views_percentage"],
+                        overall_means_1["south_america_views_percentage"],
+                        overall_means_1["africa_views_percentage"]),
+    overall_means_2 = c(overall_means_2["europe_views_percentage"],
+                        overall_means_2["oceania_views_percentage"],
+                        overall_means_2["asia_views_percentage"],
+                        overall_means_2["north_america_views_percentage"],
+                        overall_means_2["south_america_views_percentage"],
+                        overall_means_2["africa_views_percentage"])
+)
+
+## Reshaping for plotting
+regional_views_long <- pivot_longer(regional_views, cols = starts_with("overall_means"),
+                                    names_to = "phase", values_to = "value")
+
+## Replacing phase labels
+regional_views_long$phase <- recode(regional_views_long$phase, 
+                                    "overall_means_1" = "Overall Means 1", 
+                                    "overall_means_2" = "Overall Means 2")
+
+## Plotting the grouped bar chart
+ggplot(regional_views_long, aes(x = region, y = value, fill = phase)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    scale_fill_manual(values = c("Overall Means 1" = "#f3da4c", "Overall Means 2" = "#c8a530")) +  # Replace with actual colors
+    labs(title = "Grouped Bar Chart for Regional Views by Phase", x = "Region", y = "View Percentage") +
+    theme_minimal() + 
+  theme(plot.title = element_text(size = 15, hjust = 0.5),      # Title font size
+        axis.title.x = element_text(size = 10),                 # X-axis label font size
+        axis.title.y = element_text(size = 10),                 # Y-axis label font size
+        axis.text.x = element_text(size = 10),                  # X-axis tick label font size
+        axis.text.y = element_text(size = 10),                  # Y-axis tick label font size
+        legend.text = element_text(size = 10)                   # Legend text size
+        ) 
+```
+
+\section{\normalsize Synthesis and Insights}
+
+The combination of these models highlights key trends in learner engagement, device usage, and regional differences:
+
+Overall Engagement Trends: Over the five years, a gradual increase in video completion rates and device usage can be observed. This trend may reflect improvements in course design or changes in learner preferences.
+
+Device Usage: Mobile devices have become changing over the years, with learners progressively shifting from desktop to mobile platforms. This trend is confirmed by both the line graph and heatmap, with mobile device usage showing a marked rise, particularly for higher completion categories (e.g., "Viewed 100%").
+
+Regional Differences: The grouped bar chart reveals that regions such as Asia and Europe show higher engagement levels across phases compared to regions like South America and Oceania. These findings may suggest that access to devices or internet infrastructure impacts engagement, highlighting areas where targeted interventions could improve learner retention.
+
+```{r echo = FALSE, message=FALSE, results='hide', include=FALSE}
+## ALLUVIAL DIAGRAM for Engagement Metrics for all years
+
+## Loading necessary packages
+if (!require(ggalluvial)) install.packages("ggalluvial")
+if (!require(ggrepel)) install.packages("ggrepel")
+
+library(ggalluvial)
+library(ggrepel)
+
+
+## Loading necessary packages
+install.packages("ggalluvial")
+library(ggalluvial)
+
+## Preparing the data to match alluvial diagram format
+alluvial_data <- data.frame(
+    category = c("viewed 5%", "viewed 10%", "viewed 20%", "viewed 50%", "viewed 75%", "viewed 95%",
+                 "viewed 100%", "console device %", "desktop device %", "mobile device %",
+                 "tv device %", "tablet device %", "unknown device %"),
+    phase_1 = c(overall_means_1[c("viewed_five_percent", "viewed_ten_percent",
+                                  "viewed_twentyfive_percent", "viewed_fifty_percent",
+                                  "viewed_seventyfive_percent", "viewed_ninetyfive_percent",
+                                  "viewed_onehundred_percent", "console_device_percentage",
+                                  "desktop_device_percentage", "mobile_device_percentage",
+                                  "tv_device_percentage", "tablet_device_percentage",
+                                  "unknown_device_percentage")]),
+    phase_2 = c(overall_means_2[c("viewed_five_percent", "viewed_ten_percent",
+                                  "viewed_twentyfive_percent", "viewed_fifty_percent",
+                                  "viewed_seventyfive_percent", "viewed_ninetyfive_percent",
+                                  "viewed_onehundred_percent", "console_device_percentage",
+                                  "desktop_device_percentage", "mobile_device_percentage",
+                                  "tv_device_percentage", "tablet_device_percentage",
+                                  "unknown_device_percentage")])
+)
+
+## Reshaping the data into the required long format
+## Accessing the required library
+library(tidyr)
+alluvial_data_long <- pivot_longer(alluvial_data,
+                                   cols = starts_with("phase"),
+                                   names_to = "phase",
+                                   values_to = "value")
+
+## Checking the reshaped data
+head(alluvial_data_long)
+
+## Plotting the alluvial diagram
+geom_text(stat = "stratum", aes(label = after_stat(stratum)),
+          size = 3.5, color = "black", fontface = "bold")
+
+geom_text(stat = "stratum", aes(label = after_stat(stratum)),
+          size = 3.5, color = "black", angle = 45, hjust = 1)
+
+install.packages("ggrepel")
+
+library(ggrepel)
+
+ggplot(alluvial_data_long, aes(axis1 = category, axis2 = phase, y = value)) +
+    geom_alluvium(aes(fill = phase)) +
+    geom_stratum(aes(fill = phase)) +
+    geom_text_repel(stat = "stratum", aes(label = after_stat(stratum)),
+                    size = 3, color = "black", box.padding = 0.5,
+                    max.overlaps = 20) + # Reduces overlaps by spreading labels
+    scale_x_discrete(limits = c("Category", "Phase"), expand = c(0.15, 0.15)) +
+    scale_y_continuous(labels = scales::comma) +
+    scale_fill_manual(values = c("phase_1" = "#f3da4c", "phase_2" = "#c8a530")) +
+    labs(title = "Alluvial Diagram: Phase 1 and Phase 2 Engagement Metrics",
+         x = "Category", y = "Value") +
+    theme_minimal() +
+    theme(legend.position = "none")
+```
+
+\section{\Large Round 2 Evaluation}
+
+The second phase of the CRISP-DM process has successfully addressed the research question regarding how learner engagement with video content has evolved over a five-year period. The analysis revealed significant shifts in device usage, with a notable increase in mobile device access, and highlighted regional differences in engagement patterns. These insights are crucial for course designers and platform administrators, as they provide actionable information for optimizing course content and delivery across various devices and geographies. Additionally, the study identified engagement behaviors that correlate with higher completion rates, offering valuable guidance for improving learner retention and course relevance.
+
+The findings were presented in clear and accessible visualizations, including line charts, heatmaps, and other diagrams, to allow stakeholders to easily interpret the data and derive actionable insights. The use of reliable data from FutureLearn and the structured, longitudinal analysis ensured that the results were both reliable and relevant. Overall, this phase has successfully met the objectives of providing a comprehensive understanding of how learner engagement has evolved, and the insights generated can inform strategies to improve learner experience and retention in MOOCs moving forward.
+
+
+
+
