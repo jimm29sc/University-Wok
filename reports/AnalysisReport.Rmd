@@ -10,11 +10,10 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath('..'))
 ```
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(ProjectTemplate)
 load.project()
 ```
-
 
 
 \section{\Large Introduction}
@@ -134,12 +133,13 @@ Interpretation: The bar plot highlights the increasing reliance on desktop but m
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, include=FALSE}
 library(readr)
-X3_video_stats <- read_csv("cyber-security-3_video-stats.csv")
-X4_video_stats <- read_csv("cyber-security-4_video-stats.csv")
-X5_video_stats <- read_csv("cyber-security-5_video-stats.csv")
-X6_video_stats <- read_csv("cyber-security-6_video-stats.csv")
-X7_video_stats <- read_csv("cyber-security-7_video-stats.csv")
 
+# Ensuring the correct file path and use read_csv to load the files
+X3_video_stats <- read_csv("H:/work 1/data/cyber-security-3_video-stats.csv")
+X4_video_stats <- read_csv("H:/work 1/data/cyber-security-4_video-stats.csv")
+X5_video_stats <- read_csv("H:/work 1/data/cyber-security-5_video-stats.csv")
+X6_video_stats <- read_csv("H:/work 1/data/cyber-security-6_video-stats.csv")
+X7_video_stats <- read_csv("H:/work 1/data/cyber-security-7_video-stats.csv")
 
 ```
 
@@ -885,79 +885,6 @@ Overall Engagement Trends: Over the five years, a gradual increase in video comp
 Device Usage: Mobile devices have become changing over the years, with learners progressively shifting from desktop to mobile platforms. This trend is confirmed by both the line graph and heatmap, with mobile device usage showing a marked rise, particularly for higher completion categories (e.g., "Viewed 100%").
 
 Regional Differences: The grouped bar chart reveals that regions such as Asia and Europe show higher engagement levels across phases compared to regions like South America and Oceania. These findings may suggest that access to devices or internet infrastructure impacts engagement, highlighting areas where targeted interventions could improve learner retention.
-
-```{r echo = FALSE, message=FALSE, results='hide', include=FALSE}
-## ALLUVIAL DIAGRAM for Engagement Metrics for all years
-
-## Loading necessary packages
-if (!require(ggalluvial)) install.packages("ggalluvial")
-if (!require(ggrepel)) install.packages("ggrepel")
-
-library(ggalluvial)
-library(ggrepel)
-
-
-## Loading necessary packages
-install.packages("ggalluvial")
-library(ggalluvial)
-
-## Preparing the data to match alluvial diagram format
-alluvial_data <- data.frame(
-    category = c("viewed 5%", "viewed 10%", "viewed 20%", "viewed 50%", "viewed 75%", "viewed 95%",
-                 "viewed 100%", "console device %", "desktop device %", "mobile device %",
-                 "tv device %", "tablet device %", "unknown device %"),
-    phase_1 = c(overall_means_1[c("viewed_five_percent", "viewed_ten_percent",
-                                  "viewed_twentyfive_percent", "viewed_fifty_percent",
-                                  "viewed_seventyfive_percent", "viewed_ninetyfive_percent",
-                                  "viewed_onehundred_percent", "console_device_percentage",
-                                  "desktop_device_percentage", "mobile_device_percentage",
-                                  "tv_device_percentage", "tablet_device_percentage",
-                                  "unknown_device_percentage")]),
-    phase_2 = c(overall_means_2[c("viewed_five_percent", "viewed_ten_percent",
-                                  "viewed_twentyfive_percent", "viewed_fifty_percent",
-                                  "viewed_seventyfive_percent", "viewed_ninetyfive_percent",
-                                  "viewed_onehundred_percent", "console_device_percentage",
-                                  "desktop_device_percentage", "mobile_device_percentage",
-                                  "tv_device_percentage", "tablet_device_percentage",
-                                  "unknown_device_percentage")])
-)
-
-## Reshaping the data into the required long format
-## Accessing the required library
-library(tidyr)
-alluvial_data_long <- pivot_longer(alluvial_data,
-                                   cols = starts_with("phase"),
-                                   names_to = "phase",
-                                   values_to = "value")
-
-## Checking the reshaped data
-head(alluvial_data_long)
-
-## Plotting the alluvial diagram
-geom_text(stat = "stratum", aes(label = after_stat(stratum)),
-          size = 3.5, color = "black", fontface = "bold")
-
-geom_text(stat = "stratum", aes(label = after_stat(stratum)),
-          size = 3.5, color = "black", angle = 45, hjust = 1)
-
-install.packages("ggrepel")
-
-library(ggrepel)
-
-ggplot(alluvial_data_long, aes(axis1 = category, axis2 = phase, y = value)) +
-    geom_alluvium(aes(fill = phase)) +
-    geom_stratum(aes(fill = phase)) +
-    geom_text_repel(stat = "stratum", aes(label = after_stat(stratum)),
-                    size = 3, color = "black", box.padding = 0.5,
-                    max.overlaps = 20) + # Reduces overlaps by spreading labels
-    scale_x_discrete(limits = c("Category", "Phase"), expand = c(0.15, 0.15)) +
-    scale_y_continuous(labels = scales::comma) +
-    scale_fill_manual(values = c("phase_1" = "#f3da4c", "phase_2" = "#c8a530")) +
-    labs(title = "Alluvial Diagram: Phase 1 and Phase 2 Engagement Metrics",
-         x = "Category", y = "Value") +
-    theme_minimal() +
-    theme(legend.position = "none")
-```
 
 \section{\Large Round 2 Evaluation}
 
