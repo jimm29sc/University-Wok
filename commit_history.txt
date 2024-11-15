@@ -1,0 +1,53 @@
+commit 7c7d2b80d01f9cc5dc848dc300e2177a581aa956
+Author: Jimmy <jimmy.harpt@gmail.com>
+Date:   Fri Nov 15 05:18:45 2024 +0000
+
+    Update README with setup instructions
+
+commit 7a30c5fde71860b5232c30e9f3a628fd65920ecc
+Author: Jimmy <jimmy.harpt@gmail.com>
+Date:   Fri Nov 15 04:44:17 2024 +0000
+
+    Move renv folder to H:/work 1 and update environment
+
+commit c5813d2ed9c21981278e8a47f8dfc5ca8c92be42
+Author: Jimmy <jimmy.harpt@gmail.com>
+Date:   Fri Nov 15 04:11:47 2024 +0000
+
+    Updated R Markdown file with analysis
+
+commit 692c2d507f9198407ada1f00a37624de382e83b4
+Author: Jimmy <jimmy.harpt@gmail.com>
+Date:   Fri Nov 15 03:57:14 2024 +0000
+
+    Remove old renv setup
+
+commit 127f23be7163290fc312e7cb72a7a973df3ce6f8
+Author: Jimmy <jimmy.harpt@gmail.com>
+Date:   Fri Nov 15 03:22:00 2024 +0000
+
+    Set up renv and loaded packages
+
+commit a0657d32f2c9364f2e7e551749a7cae0cd861d7f
+Author: Jimmy <jimmy.harpt@gmail.com>
+Date:   Fri Nov 15 02:41:58 2024 +0000
+
+    Set up R Markdown and load data
+
+commit ca1f7e5ebf2c445ae12e8e9c77c9ea2beaa4fd17
+Author: Jimmy Cabrera (PGR) <c3070229@newcastle.ac.uk>
+Date:   Fri Nov 15 02:03:57 2024 +0000
+
+    Set up ProjectTemplate
+
+commit fb6f0ca8c2ee0f0eac648a94e52fed5f5bf95238
+Author: Jimmy <jimmy.harpt@gmail.com>
+Date:   Fri Nov 15 01:56:53 2024 +0000
+
+    Initial commit
+
+commit 74dfc9aca6c3febc14031b2503b164d0da7e8aa6
+Author: Jimmy Cabrera (PGR) <c3070229@newcastle.ac.uk>
+Date:   Fri Nov 15 01:28:02 2024 +0000
+
+    Set up ProjectTemplate
