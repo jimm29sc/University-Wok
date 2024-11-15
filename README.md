@@ -1,40 +1,53 @@
-# work 1
+MOOC Learner Engagement Analysis
+This repository contains an analysis of learner engagement on a Massive Open Online Course (MOOC) platform over a five-year period, using the CRISP-DM methodology. The goal is to uncover trends in geographic engagement, device usage, and content completion rates, and identify areas for improving learner experience and retention.
 
-Welcome to ProjectTemplate!
+Project Overview
+This analysis explores:
 
-This file introduces you to ProjectTemplate, but you should eventually replace
-the contents of this file with an introduction to your project. People who
-work with your data in the future will thank you for it, including your future
-self.
+Engagement by geographic region
+Device type trends
+Completion rates and video consumption patterns
+Data visualizations—such as bar plots, line graphs, heatmaps, and bubble charts—highlight how engagement patterns vary across time and regions, informing strategies to enhance engagement.
 
-ProjectTemplate is an R package that helps you organize your statistical
-analysis projects. Since you're reading this file, we'll assume that you've
-already called `create.project()` to set up this project and all of its
-contents.
+Data and Prerequisites
 
-To load your new project, you'll first need to `setwd()` into the directory
-where this README file is located. Then you need to run the following two
-lines of R code:
+Data Source: Five-year learner engagement data from FutureLearn, including video views, device types, and geographic details.
+Requirements: R Studio with the ProjectTemplate library. Required packages are specified in the configuration.
+Installation
+Clone the Repository:
+bash
+Copy code
+git clone https://github.com/jimm29sc/University-Wok.git
+Navigate to the Directory:
+bash
+Copy code
+cd University-Wok
+Load the Project in R Studio: Run the following lines in R to load the project environment:
+R
+Copy code
+library('ProjectTemplate')
+load.project()
+Usage
 
-	library('ProjectTemplate')
-	load.project()
+Prepare Data: Ensure all data is cleaned, standardized, and includes identifiers for each year to support trend analysis.
 
-After you enter the second line of code, you'll see a series of automated
-messages as ProjectTemplate goes about doing its work. This work involves:
-* Reading in the global configuration file contained in `config`.
-* Loading any R packages you listed in the configuration file.
-* Reading in any datasets stored in `data` or `cache`.
-* Preprocessing your data using the files in the `munge` directory.
+Run Analysis:
+Each script in src runs a specific part of the analysis, generating visualizations saved in output/visualizations.
+Data Preparation: Process and clean data with data_preparation.R.
+Visualization: Generate visuals by running analysis_script.R.
+Interpret Results:
+Regional Distribution: Bar chart displaying engagement by region.
+Video Completion: Line plots showing viewer drop-off rates.
+Device Usage: Heatmaps and bubble charts identifying trends by device.
+Results and Insights
+Results are stored in the output folder. Key findings include regional and device-based engagement patterns and trends in completion rates, supporting strategies for optimizing content and engagement.
 
-Once that's done, you can execute any code you'd like. For every analysis
-you create, we'd recommend putting a separate file in the `src` directory.
-If the files start with the two lines mentioned above:
+This README outlines setup, running analysis, and interpreting results. Enjoy exploring the insights from the MOOC Learner Engagement Analysis!
 
-	library('ProjectTemplate')
-	load.project()
 
-You'll have access to all of your data, already fully preprocessed, and
-all of the libraries you want to use.
 
-For more details about ProjectTemplate, see http://projecttemplate.net
-# University-Wok
+
+
+
+
+
